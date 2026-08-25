@@ -9,6 +9,8 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 
+const STREAM_URL = "https://samjah-stream.vercel.app";
+
 const atmospheres = [
   {
     title: "Coffee Morning",
@@ -17,7 +19,8 @@ const atmospheres = [
   },
   {
     title: "Lunch Lounge",
-    description: "Sanfte Lounge Sounds für stilvolle Mittagspausen und Gespräche.",
+    description:
+      "Sanfte Lounge Sounds für stilvolle Mittagspausen und Gespräche.",
     image: "/covers/lunch-lounge.png",
   },
   {
@@ -27,7 +30,8 @@ const atmospheres = [
   },
   {
     title: "Sunset Lounge",
-    description: "Goldene Abendstimmung für Bars, Rooftops und Terrassen.",
+    description:
+      "Goldene Abendstimmung für Bars, Rooftops und Terrassen.",
     image: "/covers/sunset-lounge.png",
   },
   {
@@ -37,7 +41,8 @@ const atmospheres = [
   },
   {
     title: "Rainy Day",
-    description: "Ruhige Klänge für gemütliche Cafés und entspannte Räume.",
+    description:
+      "Ruhige Klänge für gemütliche Cafés und entspannte Räume.",
     image: "/covers/rainy-day.png",
   },
 ];
@@ -45,22 +50,26 @@ const atmospheres = [
 const locations = [
   {
     title: "Cafés",
-    description: "Warme Atmosphären für Kaffee, Frühstück und gute Gespräche.",
+    description:
+      "Warme Atmosphären für Kaffee, Frühstück und gute Gespräche.",
     icon: Store,
   },
   {
     title: "Restaurants",
-    description: "Stilvolle Musik, die dein Essen begleitet, ohne Gespräche zu überdecken.",
+    description:
+      "Stilvolle Musik, die dein Essen begleitet, ohne Gespräche zu überdecken.",
     icon: UtensilsCrossed,
   },
   {
     title: "Hotels",
-    description: "Hochwertige Soundscapes für Lobby, Bar, Lounge und Empfang.",
+    description:
+      "Hochwertige Soundscapes für Lobby, Bar, Lounge und Empfang.",
     icon: Hotel,
   },
   {
     title: "Lounges & Bars",
-    description: "Entspannte Grooves für Abendstimmung, Drinks und besondere Momente.",
+    description:
+      "Entspannte Grooves für Abendstimmung, Drinks und besondere Momente.",
     icon: Headphones,
   },
 ];
@@ -110,14 +119,14 @@ export default function HomePage() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="https://samjah-stream.vercel.app/login"
+              href={`${STREAM_URL}/login`}
               className="hidden rounded-full px-5 py-2.5 text-sm font-semibold text-[#BFAE98] transition hover:text-[#F5E9D8] sm:block"
             >
               Anmelden
             </Link>
 
             <Link
-              href="https://samjah-stream.vercel.app/register"
+              href={`${STREAM_URL}/register`}
               className="rounded-full bg-[#D89A3C] px-5 py-2.5 text-sm font-bold text-[#120D09] transition hover:bg-[#E9B65A]"
             >
               Stream starten
@@ -160,7 +169,7 @@ export default function HomePage() {
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                href="https://samjah-stream.vercel.app/register"
+                href={`${STREAM_URL}/register`}
                 className="inline-flex items-center justify-center gap-3 rounded-full bg-[#D89A3C] px-7 py-4 font-bold text-[#120D09] transition hover:bg-[#E9B65A]"
               >
                 Samjah Stream entdecken
@@ -219,7 +228,7 @@ export default function HomePage() {
             </div>
 
             <Link
-              href="https://samjah-stream.vercel.app/register"
+              href={`${STREAM_URL}/register`}
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#D89A3C] transition hover:text-[#E9B65A]"
             >
               Alle Atmosphären entdecken
@@ -231,7 +240,7 @@ export default function HomePage() {
             {atmospheres.map((atmosphere) => (
               <Link
                 key={atmosphere.title}
-                href="https://samjah-stream.vercel.app/register"
+                href={`${STREAM_URL}/register`}
                 className="group overflow-hidden rounded-[28px] border border-[#3A2B22] bg-[#171311] transition duration-300 hover:-translate-y-1 hover:border-[#D89A3C]/40"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -351,7 +360,7 @@ export default function HomePage() {
               </ul>
 
               <Link
-                href="https://samjah-stream.vercel.app/register"
+                href={`${STREAM_URL}/register`}
                 className="mt-10 inline-flex items-center gap-3 rounded-full bg-[#D89A3C] px-7 py-4 font-bold text-[#120D09] transition hover:bg-[#E9B65A]"
               >
                 Stream starten
@@ -393,23 +402,46 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-[#8D7B68]">
-            <a href="#atmosphaeren" className="transition hover:text-[#D89A3C]">
+            <a
+              href="#atmosphaeren"
+              className="transition hover:text-[#D89A3C]"
+            >
               Atmosphären
             </a>
 
-            <a href="#locations" className="transition hover:text-[#D89A3C]">
+            <a
+              href="#locations"
+              className="transition hover:text-[#D89A3C]"
+            >
               Für Locations
             </a>
 
-            <a href="#premium" className="transition hover:text-[#D89A3C]">
+            <a
+              href="#premium"
+              className="transition hover:text-[#D89A3C]"
+            >
               Premium
             </a>
 
             <Link
-              href="https://samjah-stream.vercel.app/login"
+              href={`${STREAM_URL}/login`}
               className="transition hover:text-[#D89A3C]"
             >
               Login
+            </Link>
+
+            <Link
+              href="/impressum"
+              className="transition hover:text-[#D89A3C]"
+            >
+              Impressum
+            </Link>
+
+            <Link
+              href="/datenschutz"
+              className="transition hover:text-[#D89A3C]"
+            >
+              Datenschutz
             </Link>
           </div>
         </div>
