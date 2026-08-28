@@ -443,6 +443,13 @@ export default function HomePage() {
             >
               Datenschutz
             </Link>
+
+            <a
+              href="mailto:smjhlofi@gmail.com"
+              className="transition hover:text-[#D89A3C]"
+            >
+              Kontakt
+            </a>
           </div>
         </div>
 
