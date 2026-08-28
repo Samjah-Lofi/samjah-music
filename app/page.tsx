@@ -185,7 +185,7 @@ export default function HomePage() {
             </div>
 
             <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-[#BFAE98]">
-              <span>GEMA freie Musik</span>
+              <span>100 % eigene Musik</span>
               <span>Professionelle Nutzung</span>
               <span>19,90 € / Monat</span>
             </div>
