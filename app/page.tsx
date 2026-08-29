@@ -22,40 +22,40 @@ const atmospheres = [
     title: "Coffee Morning",
     description: "Warme LoFi Klänge für einen entspannten Start in den Tag.",
     image: "/covers/coffee-morning.png",
-    audio: "/audio/Coffee-Morning.mp3",
+    audio: "/audio/demo/Coffee-Morning.mp3",
   },
   {
     title: "Lunch Lounge",
     description:
       "Sanfte Lounge Sounds für stilvolle Mittagspausen und Gespräche.",
     image: "/covers/lunch-lounge.png",
-    audio: "/audio/Lunch-Lounge.mp3",
+    audio: "/audio/demo/Lunch-Lounge.mp3",
   },
   {
     title: "Afro Lounge",
     description: "Warme Afro Grooves mit entspannter Lounge Atmosphäre.",
     image: "/covers/afro-lounge.png",
-    audio: "/audio/Afro-Lounge.mp3",
+    audio: "/audio/demo/Afro-Lounge.mp3",
   },
   {
     title: "Sunset Lounge",
     description:
       "Goldene Abendstimmung für Bars, Rooftops und Terrassen.",
     image: "/covers/sunset-lounge.png",
-    audio: "/audio/Sunset-Lounge.mp3",
+    audio: "/audio/demo/Sunset-Lounge.mp3",
   },
   {
     title: "Late Night",
     description: "Elegante Jazz und LoFi Sounds für lange Abende.",
     image: "/covers/late-night.png",
-    audio: "/audio/Late-Night.mp3",
+    audio: "/audio/demo/Late-Night.mp3",
   },
   {
     title: "Rainy Day",
     description:
       "Ruhige Klänge für gemütliche Cafés und entspannte Räume.",
     image: "/covers/rainy-day.png",
-    audio: "/audio/Rainy-Day.mp3",
+    audio: "/audio/demo/Rainy-Day.mp3",
   },
 ];
 
