@@ -27,27 +27,26 @@ export default function ImpressumPage() {
 
           <div className="mt-12 space-y-10 text-[#BFAE98]">
             <section>
-              <h2 className="text-2xl font-bold text-[#F5E9D8]">
-                Angaben gemäß § 5 DDG
-              </h2>
-
-              <p className="mt-4 leading-8">
+              <div className="leading-8">
                 Benjamin Brändle
+                <br />
+                Samjah Music
                 <br />
                 Fliederweg 36
                 <br />
                 74821 Mosbach
                 <br />
                 Deutschland
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-[#F5E9D8]">
-                Kontakt
-              </h2>
-
-              <p className="mt-4 leading-8">
+                <br />
+                <br />
+                Tel.:{" "}
+                <a
+                  href="tel:+4917620561899"
+                  className="text-[#D89A3C] hover:text-[#E9B65A]"
+                >
+                  017620561899
+                </a>
+                <br />
                 E-Mail:{" "}
                 <a
                   href="mailto:smjhlofi@gmail.com"
@@ -56,31 +55,22 @@ export default function ImpressumPage() {
                   smjhlofi@gmail.com
                 </a>
                 <br />
-                Telefon:{" "}
-                <a
-                  href="tel:+4917620561899"
-                  className="text-[#D89A3C] hover:text-[#E9B65A]"
-                >
-                  +49 176 20561899
-                </a>
-              </p>
+                <br />
+                Umsatzsteuerbefreit (Kleinunternehmerregelung)
+              </div>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#F5E9D8]">
-                Verantwortlich für den Inhalt
-              </h2>
-
-              <p className="mt-4 leading-8">
-                Benjamin Brändle
-                <br />
-                Fliederweg 36
-                <br />
-                74821 Mosbach
-                <br />
-                Deutschland
+              <p className="leading-8">
+                Wir sind zur Teilnahme an einem Streitbeilegungsverfahren vor
+                einer Verbraucherschlichtungsstelle weder verpflichtet noch
+                bereit.
               </p>
             </section>
+
+            <div className="border-t border-[#3A2B22] pt-8 text-xs text-[#6F6257]">
+              Stand: 29.08.2026, 19:39:05
+            </div>
           </div>
         </div>
       </div>
