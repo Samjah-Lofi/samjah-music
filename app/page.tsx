@@ -444,6 +444,13 @@ export default function HomePage() {
               Datenschutz
             </Link>
 
+            <Link
+              href="/agb"
+              className="transition hover:text-[#D89A3C]"
+            >
+              AGB
+            </Link>
+
             <a
               href="mailto:smjhlofi@gmail.com"
               className="transition hover:text-[#D89A3C]"
