@@ -1,49 +1,61 @@
-﻿import Image from "next/image";
+﻿"use client";
+
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   Check,
   Headphones,
   Hotel,
+  Pause,
+  Play,
   Store,
   UtensilsCrossed,
 } from "lucide-react";
+import { useRef, useState } from "react";
 
 const STREAM_URL = "https://samjah-stream.vercel.app";
+const DEMO_DURATION = 30;
 
 const atmospheres = [
   {
     title: "Coffee Morning",
     description: "Warme LoFi Klänge für einen entspannten Start in den Tag.",
     image: "/covers/coffee-morning.png",
+    audio: "/audio/Coffee-Morning.mp3",
   },
   {
     title: "Lunch Lounge",
     description:
       "Sanfte Lounge Sounds für stilvolle Mittagspausen und Gespräche.",
     image: "/covers/lunch-lounge.png",
+    audio: "/audio/Lunch-Lounge.mp3",
   },
   {
     title: "Afro Lounge",
     description: "Warme Afro Grooves mit entspannter Lounge Atmosphäre.",
     image: "/covers/afro-lounge.png",
+    audio: "/audio/Afro-Lounge.mp3",
   },
   {
     title: "Sunset Lounge",
     description:
       "Goldene Abendstimmung für Bars, Rooftops und Terrassen.",
     image: "/covers/sunset-lounge.png",
+    audio: "/audio/Sunset-Lounge.mp3",
   },
   {
     title: "Late Night",
     description: "Elegante Jazz und LoFi Sounds für lange Abende.",
     image: "/covers/late-night.png",
+    audio: "/audio/Late-Night.mp3",
   },
   {
     title: "Rainy Day",
     description:
       "Ruhige Klänge für gemütliche Cafés und entspannte Räume.",
     image: "/covers/rainy-day.png",
+    audio: "/audio/Rainy-Day.mp3",
   },
 ];
 
@@ -83,6 +95,70 @@ const benefits = [
 ];
 
 export default function HomePage() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const stopTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [playingTitle, setPlayingTitle] = useState<string | null>(null);
+
+  const stopDemo = () => {
+    if (stopTimerRef.current) {
+      clearTimeout(stopTimerRef.current);
+      stopTimerRef.current = null;
+    }
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
+    setPlayingTitle(null);
+  };
+
+  const handlePlay = async (title: string, audioUrl: string) => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+
+      audioRef.current.addEventListener("ended", () => {
+        if (stopTimerRef.current) {
+          clearTimeout(stopTimerRef.current);
+          stopTimerRef.current = null;
+        }
+
+        setPlayingTitle(null);
+      });
+    }
+
+    const audio = audioRef.current;
+
+    if (playingTitle === title) {
+      stopDemo();
+      return;
+    }
+
+    if (stopTimerRef.current) {
+      clearTimeout(stopTimerRef.current);
+      stopTimerRef.current = null;
+    }
+
+    audio.pause();
+    audio.src = audioUrl;
+    audio.currentTime = 0;
+
+    try {
+      await audio.play();
+      setPlayingTitle(title);
+
+      stopTimerRef.current = setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        setPlayingTitle(null);
+        stopTimerRef.current = null;
+      }, DEMO_DURATION * 1000);
+    } catch (error) {
+      console.error("Demo Audio konnte nicht gestartet werden:", error);
+      setPlayingTitle(null);
+    }
+  };
+
   return (
     <main className="min-h-screen overflow-hidden bg-[#0B0908] text-[#F5E9D8]">
       <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/5 bg-[#0B0908]/85 backdrop-blur-xl">
@@ -225,6 +301,10 @@ export default function HomePage() {
               <h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
                 Für jeden Moment der passende Sound.
               </h2>
+
+              <p className="mt-5 max-w-2xl text-[#BFAE98]">
+                Hör dir direkt an, wie Samjah klingt.
+              </p>
             </div>
 
             <Link
@@ -237,37 +317,85 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {atmospheres.map((atmosphere) => (
-              <Link
-                key={atmosphere.title}
-                href={`${STREAM_URL}/register`}
-                className="group overflow-hidden rounded-[28px] border border-[#3A2B22] bg-[#171311] transition duration-300 hover:-translate-y-1 hover:border-[#D89A3C]/40"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={atmosphere.image}
-                    alt={atmosphere.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
+            {atmospheres.map((atmosphere) => {
+              const isPlaying = playingTitle === atmosphere.title;
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+              return (
+                <div
+                  key={atmosphere.title}
+                  className="group overflow-hidden rounded-[28px] border border-[#3A2B22] bg-[#171311] transition duration-300 hover:-translate-y-1 hover:border-[#D89A3C]/40"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={atmosphere.image}
+                      alt={atmosphere.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
 
-                  <div className="absolute bottom-5 left-5">
-                    <h3 className="text-2xl font-bold">
-                      {atmosphere.title}
-                    </h3>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+                    <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
+                      <div>
+                        <h3 className="text-2xl font-bold">
+                          {atmosphere.title}
+                        </h3>
+
+                        <p className="mt-1 text-xs text-white/60">
+                          30 Sekunden Demo
+                        </p>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handlePlay(atmosphere.title, atmosphere.audio)
+                        }
+                        aria-label={
+                          isPlaying
+                            ? `${atmosphere.title} pausieren`
+                            : `${atmosphere.title} Demo abspielen`
+                        }
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#D89A3C] text-[#120D09] shadow-lg transition hover:bg-[#E9B65A]"
+                      >
+                        {isPlaying ? (
+                          <Pause size={19} fill="currentColor" />
+                        ) : (
+                          <Play size={19} fill="currentColor" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <p className="leading-7 text-[#BFAE98]">
+                      {atmosphere.description}
+                    </p>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handlePlay(atmosphere.title, atmosphere.audio)
+                      }
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#D89A3C] transition hover:text-[#E9B65A]"
+                    >
+                      {isPlaying ? (
+                        <>
+                          <Pause size={16} />
+                          Demo pausieren
+                        </>
+                      ) : (
+                        <>
+                          <Play size={16} fill="currentColor" />
+                          Demo anhören
+                        </>
+                      )}
+                    </button>
                   </div>
                 </div>
-
-                <div className="p-6">
-                  <p className="leading-7 text-[#BFAE98]">
-                    {atmosphere.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
